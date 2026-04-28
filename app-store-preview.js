@@ -39,6 +39,8 @@ const styles = [
   },
 ];
 
+const assetVersion = "adaptive-statusbar-20260428-1608";
+
 const rail = document.querySelector("#screenshotRail");
 const tabs = document.querySelector("#styleTabs");
 const lightbox = document.querySelector("#lightbox");
@@ -53,7 +55,7 @@ function labelFromName(name) {
 }
 
 function imagePath(style, name) {
-  return `${style.base}/${name}`;
+  return `${style.base}/${name}?v=${assetVersion}`;
 }
 
 function createCard(style, name) {
