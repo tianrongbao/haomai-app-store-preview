@@ -192,6 +192,43 @@ h2 {
   letter-spacing: 0;
 }
 
+.device-label {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #f2f2f7;
+  color: #515154;
+  font-size: 13px;
+}
+
+.style-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 0 18px;
+  scrollbar-width: thin;
+}
+
+.style-tabs button {
+  flex: 0 0 auto;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  background: white;
+  color: #3a3a3c;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.style-tabs button[aria-selected="true"] {
+  border-color: var(--text);
+  background: var(--text);
+  color: white;
+}
+
 .segmented {
   display: flex;
   gap: 4px;

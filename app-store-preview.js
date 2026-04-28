@@ -1,4 +1,4 @@
-const screenshots = [
+const screenshotOrder = [
   "13-用户指引1.png",
   "14-用户指引2.png",
   "15-用户指引3.png",
@@ -11,43 +11,106 @@ const screenshots = [
   "07-我的界面1.png",
 ];
 
+const styles = [
+  {
+    id: "glass",
+    label: "深色玻璃光幕",
+    base: "./AppStore多风格输出/01-深色玻璃光幕",
+  },
+  {
+    id: "white-card",
+    label: "白色大卡片",
+    base: "./AppStore多风格输出/02-白色大卡片清爽风",
+  },
+  {
+    id: "black-title",
+    label: "黑底大标题",
+    base: "./AppStore多风格输出/03-黑底大标题首版风",
+  },
+  {
+    id: "blue-white",
+    label: "蓝白清透",
+    base: "./AppStore多风格输出/04-蓝白清透风",
+  },
+  {
+    id: "graphite",
+    label: "石墨极简",
+    base: "./AppStore多风格输出/05-石墨极简质感风",
+  },
+];
+
 const rail = document.querySelector("#screenshotRail");
+const tabs = document.querySelector("#styleTabs");
 const lightbox = document.querySelector("#lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const lightboxCaption = lightbox.querySelector("p");
 const closeButton = lightbox.querySelector(".close");
 
+let currentStyle = styles[0];
+
 function labelFromName(name) {
   return name.replace(/^\d+-/, "").replace(/\.png$/, "").replaceAll("-", " / ");
 }
 
-function createCard(name) {
+function imagePath(style, name) {
+  return `${style.base}/${name}`;
+}
+
+function createCard(style, name) {
   const label = labelFromName(name);
   const figure = document.createElement("figure");
   figure.className = "shot-card";
 
   const button = document.createElement("button");
   button.type = "button";
-  button.setAttribute("aria-label", `放大预览 ${label}`);
-  button.addEventListener("click", () => openLightbox(name, label));
+  button.setAttribute("aria-label", `放大预览 ${style.label} - ${label}`);
+  button.addEventListener("click", () => openLightbox(style, name, label));
 
   const img = document.createElement("img");
-  img.src = `./AppStore输出/${name}`;
-  img.alt = label;
+  img.src = imagePath(style, name);
+  img.alt = `${style.label} - ${label}`;
   img.loading = "lazy";
 
   const caption = document.createElement("figcaption");
-  caption.textContent = label;
+  caption.textContent = `${style.label} - ${label}`;
 
   button.appendChild(img);
   figure.append(button, caption);
   return figure;
 }
 
-function openLightbox(name, label) {
-  lightboxImage.src = `./AppStore输出/${name}`;
-  lightboxImage.alt = label;
-  lightboxCaption.textContent = label;
+function renderTabs() {
+  styles.forEach((style) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.role = "tab";
+    button.id = `style-tab-${style.id}`;
+    button.textContent = style.label;
+    button.setAttribute("aria-controls", "screenshotRail");
+    button.setAttribute("aria-selected", style.id === currentStyle.id ? "true" : "false");
+    button.addEventListener("click", () => {
+      currentStyle = style;
+      tabs.querySelectorAll("button").forEach((item) => {
+        item.setAttribute("aria-selected", item.id === `style-tab-${style.id}` ? "true" : "false");
+      });
+      renderRail();
+    });
+    tabs.appendChild(button);
+  });
+}
+
+function renderRail() {
+  rail.replaceChildren();
+  screenshotOrder.forEach((name) => {
+    rail.appendChild(createCard(currentStyle, name));
+  });
+  rail.scrollLeft = 0;
+}
+
+function openLightbox(style, name, label) {
+  lightboxImage.src = imagePath(style, name);
+  lightboxImage.alt = `${style.label} - ${label}`;
+  lightboxCaption.textContent = `${style.label} - ${label}`;
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden", "false");
 }
@@ -58,9 +121,8 @@ function closeLightbox() {
   lightboxImage.removeAttribute("src");
 }
 
-screenshots.forEach((name) => {
-  rail.appendChild(createCard(name));
-});
+renderTabs();
+renderRail();
 
 closeButton.addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", (event) => {
