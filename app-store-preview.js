@@ -32,31 +32,6 @@ const bubbleScreenshotOrder = [
 
 const styles = [
   {
-    id: "glass",
-    label: "深色玻璃光幕",
-    base: "./AppStore多风格输出/01-深色玻璃光幕",
-  },
-  {
-    id: "white-card",
-    label: "白色大卡片",
-    base: "./AppStore多风格输出/02-白色大卡片清爽风",
-  },
-  {
-    id: "black-title",
-    label: "黑底大标题",
-    base: "./AppStore多风格输出/03-黑底大标题首版风",
-  },
-  {
-    id: "blue-white",
-    label: "蓝白清透",
-    base: "./AppStore多风格输出/04-蓝白清透风",
-  },
-  {
-    id: "graphite",
-    label: "石墨极简",
-    base: "./AppStore多风格输出/05-石墨极简质感风",
-  },
-  {
     id: "bubble-glass",
     label: "气泡增强｜深色玻璃",
     base: "./AppStore气泡弹窗增强输出/01-深色玻璃光幕",
@@ -81,9 +56,34 @@ const styles = [
     label: "气泡增强｜石墨极简",
     base: "./AppStore气泡弹窗增强输出/05-石墨极简质感风",
   },
+  {
+    id: "glass",
+    label: "深色玻璃光幕",
+    base: "./AppStore多风格输出/01-深色玻璃光幕",
+  },
+  {
+    id: "white-card",
+    label: "白色大卡片",
+    base: "./AppStore多风格输出/02-白色大卡片清爽风",
+  },
+  {
+    id: "black-title",
+    label: "黑底大标题",
+    base: "./AppStore多风格输出/03-黑底大标题首版风",
+  },
+  {
+    id: "blue-white",
+    label: "蓝白清透",
+    base: "./AppStore多风格输出/04-蓝白清透风",
+  },
+  {
+    id: "graphite",
+    label: "石墨极简",
+    base: "./AppStore多风格输出/05-石墨极简质感风",
+  },
 ];
 
-const assetVersion = "overflow-bubble-20260506-8";
+const assetVersion = "overflow-bubble-20260506-9";
 
 const rail = document.querySelector("#screenshotRail");
 const tabs = document.querySelector("#styleTabs");
